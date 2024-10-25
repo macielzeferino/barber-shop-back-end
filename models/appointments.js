@@ -1,5 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/sequelize");
+const Client = require("./clients");
+const Professional = require("./professionals");
 
 const Appointment = sequelize.define(
   "Appointment",
@@ -39,5 +41,15 @@ const Appointment = sequelize.define(
     timestamps: true,
   }
 );
+
+Appointment.belongsTo(Client,{
+  foreignKey:"client_id",
+  as:"client",
+});
+
+Appointment.belongsTo(Professional,{
+  foreignKey:"professional_id",
+  as:"professional",
+});
 
 module.exports = Appointment;

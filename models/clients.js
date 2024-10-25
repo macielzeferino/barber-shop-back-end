@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/sequelize");
+const Appointment = require("./appointments");
 
 const Client = sequelize.define(
   "Client",
@@ -27,5 +28,10 @@ const Client = sequelize.define(
     timestamps: true,
   }
 );
+
+Client.hasMany(Appointment, {
+  foreignKey: "client_id",
+  as: "appointments",
+})
 
 module.exports = Client;
