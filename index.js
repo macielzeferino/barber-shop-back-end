@@ -2,6 +2,9 @@ const express = require('express');
 const cors = require("cors");
 const app = express();
 
+app.use(cors());
+app.use(express.json());
+
 require("./models/associations");
 
 const clientRoutes = require("./routes/clientRoutes");
@@ -12,11 +15,9 @@ const clientRoutes = require("./routes/clientRoutes");
 //const Appointment = require("./models/appointments");
 const Client = require("./models/clients");
 
-app.use("/client", clientRoutes);
+app.use("/clients", clientRoutes);
 //app.use("/professionals", professionalRoutes);
 //app.use("/appointments", appointmentRoutes);
-app.use(cors());
-app.use(express.json());
 
 
 const port = process.env.PORT || 3000;
