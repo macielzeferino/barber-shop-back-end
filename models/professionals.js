@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/sequelize");
-const Appointment = require("./appointments");
 
 const Professional = sequelize.define(
   "Professional",
@@ -16,6 +15,17 @@ const Professional = sequelize.define(
     },
     available_schedules: {
       type: DataTypes.JSON,
+      allowNull: false,
+      defaultValue: [],
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    password: {
+      type: DataTypes.TEXT,
+      allowNull: false,
     },
   },
   {
@@ -23,10 +33,5 @@ const Professional = sequelize.define(
     timestamps: true,
   }
 );
-
-Professional.hasMany(Appointment,{
-  foreignKey:"professional_id",
-  as:"appointments",
-})
 
 module.exports = Professional;
